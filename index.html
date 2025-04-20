@@ -3,10 +3,16 @@
 <head>
 <title>Calculator</title>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+
 </head>
 
 <body>
 <p class="text-9xl m-10 p-5">Welcome to My Calculator</p>
+
+<div class="w-full flex justify-center">
+    <span id="calculator-screen" class="flex items-center justify-end text-6xl w-120 h-20 border-2 mb-5 mr-4 pr-4 border-red-300 rounded-lg"></span>
+</div>
 
 <div class="flex justify-center">
 <button type="button" class="m-2 w-25 bg-blue-500 hover:bg-blue-700 text-black hover:text-white font-bold py-2 px-4 rounded-full">7</button>
@@ -19,19 +25,84 @@
     <button type="button" class="m-2 w-25 bg-blue-500 hover:bg-blue-700 text-black hover:text-white font-bold py-2 px-4 rounded-full">4</button>
     <button type="button" class="m-2 w-25 bg-blue-500 hover:bg-blue-700 text-black hover:text-white font-bold py-2 px-4 rounded-full">5</button>
     <button type="button" class="m-2 w-25 bg-blue-500 hover:bg-blue-700 text-black hover:text-white font-bold py-2 px-4 rounded-full">6</button>
-    <button type="button" class="m-2 w-25 bg-blue-500 hover:bg-blue-700 text-black hover:text-white font-bold py-2 px-4 rounded-full flex justify-center items-center"><i data-lucide="x"></i></button>
+    <button onclick="xBtn()" type="button" class="m-2 w-25 bg-blue-500 hover:bg-blue-700 text-black hover:text-white font-bold py-2 px-4 rounded-full flex justify-center items-center"><i data-lucide="x"></i></button>
     </div>
 
     <div class="flex justify-center">
-        <button type="button" class="m-2 w-25 bg-blue-500 hover:bg-blue-700 text-black hover:text-white font-bold py-2 px-4 rounded-full">1</button>
+        <button onclick="oneBtn()" type="button" class="m-2 w-25 bg-blue-500 hover:bg-blue-700 text-black hover:text-white font-bold py-2 px-4 rounded-full">1</button>
         <button type="button" class="m-2 w-25 bg-blue-500 hover:bg-blue-700 text-black hover:text-white font-bold py-2 px-4 rounded-full">2</button>
-        <button type="button" class="m-2 w-25 bg-blue-500 hover:bg-blue-700 text-black hover:text-white font-bold py-2 px-4 rounded-full">3</button>
-        <button type="button" class="m-2 w-25 bg-blue-500 hover:bg-blue-700 text-black hover:text-white font-bold py-2 px-4 rounded-full flex justify-center items-center"><i data-lucide="minus"></i></button>
-        </div>
+        <button onclick="threeBtn()" type="button" class="m-2 w-25 bg-blue-500 hover:bg-blue-700 text-black hover:text-white font-bold py-2 px-4 rounded-full">3</button>
+        <button onclick="minusBtn()" type="button" class="m-2 w-25 bg-blue-500 hover:bg-blue-700 text-black hover:text-white font-bold py-2 px-4 rounded-full flex justify-center items-center"><i data-lucide="minus"></i></button>
+        <button onclick="acBtn()" type="button" class="m-2 w-25 bg-blue-500 hover:bg-blue-700 text-black hover:text-white font-bold py-2 px-4 rounded-full">A/C</button>    
+        <button onclick="equalsBtn()" type="button" class="m-2 w-25 bg-blue-500 hover:bg-blue-700 text-black hover:text-white font-bold py-2 px-4 rounded-full">=</button>    
+    </div>
 
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>
     lucide.createIcons();
   </script>
+
+
+<script>
+    var text = "0"
+
+    var a = 0
+    var b = 0
+    var ops
+
+   var calucatorScreen = document.getElementById("calculator-screen")
+
+   calucatorScreen.innerHTML = text
+
+    function minusBtn() {
+        alert("- btn clicked")
+        console.log("Clicked")
+    }
+    function equalsBtn() {
+        var currentValue = calucatorScreen.innerHTML
+        var split = currentValue.split(ops)
+        b = parseInt(split[1])
+
+        var answer
+        if(ops == "x") {
+            answer = a * b
+        } else if (ops == "+") {
+            answer = a + b
+        } else if (ops == "-") {
+            answer = a-b
+        }
+
+        calucatorScreen.innerHTML = answer
+    }
+    function xBtn() {
+        var currentValue = calucatorScreen.innerHTML
+        a = parseInt(currentValue)
+        ops = "x"
+        calucatorScreen.innerHTML = currentValue + "x"
+    }
+    function oneBtn() {
+        var currentValue = calucatorScreen.innerHTML
+        if(currentValue == "0") {
+            currentValue = ""
+        }
+        if(currentValue.length >= 12) {
+            return
+        }
+        calucatorScreen.innerHTML = currentValue + "1"
+    }
+    function threeBtn() {
+        var currentValue = calucatorScreen.innerHTML
+        if(currentValue == "0") {
+            currentValue = ""
+        }
+        if(currentValue.length >= 12) {
+            return
+        }
+        calucatorScreen.innerHTML = currentValue + "3"
+    }
+    function acBtn() {
+        calucatorScreen.innerHTML = "0"
+    }
+</script>
 </body>
 </html>
